@@ -33,15 +33,24 @@ func NewPaymentRepositoryPG(host, port, user, password, dbname, tableName string
 
 func (p *PaymentRepositoryPG) Create(amount float64, UserID int, Status, payTokenIdentifier string) int {
 	var id int
-	err := p.db.QueryRow(fmt.Sprintf("INSERT INTO %s (amount, user_id, status, pay_token_identifier) VALUES ($1, $2, $3, $4) RETURNING id", p.tableName), amount, UserID, Status, payTokenIdentifier).Scan(&id)
+	err := p.db.QueryRow(fmt.Sprintf("INSERT INTO %s (amount, user_id, status, pay_token_identifier, bill_id) VALUES ($1, $2, $3, $4, '') RETURNING id", p.tableName), amount, UserID, Status, payTokenIdentifier).Scan(&id)
 	if err != nil {
+		panic(err)
 		return -1
 	}
 	return id
 }
 
 func (p *PaymentRepositoryPG) UpdateStatus(id int, status string) bool {
-	_, err := p.db.Exec(fmt.Sprintf("UPDATE %s SET status = $1 WHERE id = $2", p.tableName), status, id)
+	_, err := p.db.Exec(fmt.Sprintf("UPDATE %s SET status = $1 WHERE id = $3", p.tableName), status, id)
+	if err != nil {
+		return false
+	}
+	return true
+}
+
+func (p *PaymentRepositoryPG) UpdatePayment(id int, status, billId string) bool {
+	_, err := p.db.Exec(fmt.Sprintf("UPDATE %s SET status = $1, bill_id = $2 WHERE id = $3", p.tableName), status, billId, id)
 	if err != nil {
 		return false
 	}

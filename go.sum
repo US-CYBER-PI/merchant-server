@@ -1,5 +1,5 @@
-github.com/US-CYBER-PI/qiwi-bill-paymentsgo-sdk v0.0.0-20221112150055-d0edfd5cf507 h1:xvG/kUifRspIS9qoVXTPGPQyYUw4b/8oII5i8OngV+g=
-github.com/US-CYBER-PI/qiwi-bill-paymentsgo-sdk v0.0.0-20221112150055-d0edfd5cf507/go.mod h1:vWRHZA2rZUJb90Ycd0+xehDqMnH0+eXkpYqLf70sdcA=
+github.com/US-CYBER-PI/qiwi-bill-paymentsgo-sdk v0.0.0-20221112201705-6041b871beae h1:VN7MddIPrUM4VPClUAuixFBDVaShT8TOTOyvPoFxpdk=
+github.com/US-CYBER-PI/qiwi-bill-paymentsgo-sdk v0.0.0-20221112201705-6041b871beae/go.mod h1:vWRHZA2rZUJb90Ycd0+xehDqMnH0+eXkpYqLf70sdcA=
 github.com/golang-jwt/jwt v3.2.2+incompatible h1:IfV12K8xAKAnZqdXVzCZ+TOjboZ2keLg81eXfW3O+oY=
 github.com/golang-jwt/jwt v3.2.2+incompatible/go.mod h1:8pz2t5EyA70fFQQSrl6XZXzqecmYZeUEB8OUGHkxJ+I=
 github.com/joho/godotenv v1.4.0 h1:3l4+N6zfMWnkbPEXKng2o2/MR5mSwTrBih4ZEkkz1lg=
