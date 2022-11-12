@@ -103,7 +103,7 @@ func main() {
 		panic(err)
 	}
 
-	http.HandleFunc("/merchant/pay", payHandler)
+	http.HandleFunc("/api/v1/merchant/pay", payHandler)
 
 	_ = http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
 }
