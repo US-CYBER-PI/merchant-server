@@ -42,7 +42,7 @@ func (p *PaymentRepositoryPG) Create(amount float64, UserID int, Status, payToke
 }
 
 func (p *PaymentRepositoryPG) UpdateStatus(id int, status string) bool {
-	_, err := p.db.Exec(fmt.Sprintf("UPDATE %s SET status = $1 WHERE id = $3", p.tableName), status, id)
+	_, err := p.db.Exec(fmt.Sprintf("UPDATE %s SET status = $1 WHERE id = $2", p.tableName), status, id)
 	if err != nil {
 		return false
 	}

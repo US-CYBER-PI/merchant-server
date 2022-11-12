@@ -26,9 +26,9 @@ var (
 	pgUserTable       = "users"
 	pgTokenTable      = "tokens"
 	port              = 9096
-	hmacSecret        = []byte("c4bd7d88edb4fa1817abb11707958924384f7933e5facfd707dc1d1429af9936")
-	qiwiToken         = "9f69ff96-d505-4ed1-84e2-f678867a5c23"
-	qiwiSiteId        = "sa3khn-02"
+	hmacSecret        = []byte("c3bd7d88edb4fa1817abb11702158924384f7933e5facfd707dc1d1429af9931")
+	qiwiToken         = "8f69ff16-d505-1ed1-84e3-f677467a5c23"
+	qiwiSiteId        = "sa4kjn-12"
 	jwtManager        *utils.JwtManager
 	qiwiClient        qiwiSdk.Client
 	paymentRepository _interface.PaymentRepository
