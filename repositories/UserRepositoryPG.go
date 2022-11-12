@@ -4,6 +4,7 @@ import (
 	"MerchantServer/models"
 	"database/sql"
 	"fmt"
+	_ "github.com/lib/pq"
 )
 
 type UserRepositoryPG struct {
