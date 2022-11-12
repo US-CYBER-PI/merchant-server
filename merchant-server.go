@@ -26,7 +26,7 @@ var (
 	pgUserTable       = "users"
 	pgTokenTable      = "tokens"
 	port              = 9096
-	hmacSecret        = []byte("secret")
+	hmacSecret        = []byte("c4bd7d88edb4fa1817abb11707958924384f7933e5facfd707dc1d1429af9936")
 	qiwiToken         = "9f69ff96-d505-4ed1-84e2-f678867a5c23"
 	qiwiSiteId        = "sa3khn-02"
 	jwtManager        *utils.JwtManager
@@ -130,7 +130,7 @@ func createPay(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	claim := *jwtManager.GetTokenClaim(userPayToken)
+	claim := jwtManager.GetTokenClaim(userPayToken)
 
 	if claim == nil {
 		http.Error(w, "", http.StatusBadRequest)
@@ -138,15 +138,15 @@ func createPay(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//TODO перекинуть получение в интерфейс
-	user := userRepository.GetUserById(claim["id"].(int))
+	user := userRepository.GetUserById((*claim)["id"].(int))
 	token := userRepository.GetTokenById(user.TokenId)
 
-	paymentId := paymentRepository.Create(float64(amount), user.Id, "", claim["key"].(string))
+	paymentId := paymentRepository.Create(float64(amount), user.Id, "", (*claim)["key"].(string))
 
 	resp := qiwiClient.CreatePayment(qiwiSdkModels.CreatePayment{
 		Amount: qiwiSdkSubModels.Amount{
 			Currency: "RUB",
-			Value:    float64(amount),
+			Value:    fmt.Sprintf("%.2f", float64(amount)),
 		},
 		PaymentMethod: qiwiSdkSubModels.PaymentMethod{
 			Type:         "TOKEN",
