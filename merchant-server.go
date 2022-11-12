@@ -138,7 +138,7 @@ func createPay(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//TODO перекинуть получение в интерфейс
-	user := userRepository.GetUserById((*claim)["id"].(int))
+	user := userRepository.GetUserById(int((*claim)["id"].(float64)))
 	token := userRepository.GetTokenById(user.TokenId)
 
 	paymentId := paymentRepository.Create(float64(amount), user.Id, "", (*claim)["key"].(string))
@@ -159,7 +159,7 @@ func createPay(w http.ResponseWriter, r *http.Request) {
 		Flags: []string{"BIND_PAYMENT_TOKEN"},
 	}, strconv.Itoa(paymentId))
 
-	paymentRepository.UpdateStatus(paymentId, resp.Status.Value)
+	paymentRepository.UpdatePayment(paymentId, resp.Status.Value, resp.BillId)
 
 	w.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(w).Encode(map[string]interface{}{
